@@ -1,0 +1,34 @@
+<div class="formulario">
+    <form [formGroup]="form" (ngSubmit)="enviarDados()">
+        <div>
+          <label for="nome">Código de Barras: </label>
+          <input type="number" formControlName="cod">
+        </div>
+      
+        <div>
+          <label for="email">Nome do Produto: </label>
+          <input type="text" formControlName="nome">
+        </div>
+      
+        <div>
+          <label for="cpf">Quantidade: </label>
+          <input type="number" formControlName="quantidade">
+        </div>
+      
+        <div>
+          <label for="nascimento">Preço: </label>
+          <input type="number" formControlName="valor" >
+        </div>
+    
+        <br>
+        <div>
+          <button [disabled]="!form.valid">Enviar dados</button>
+        </div>
+      
+        <br>
+        <br>
+      
+        <div>{{ form.value | json}}</div>
+        <div>{{ form.valid | json }}</div>
+      </form>
+</div>
