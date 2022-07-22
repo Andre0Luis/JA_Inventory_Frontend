@@ -1,34 +1,40 @@
 <div class="formulario">
     <form [formGroup]="form" (ngSubmit)="enviarDados()">
-        <div>
-          <label for="nome">Código de Barras: </label>
-          <input type="number" formControlName="cod">
+
+      <div class="field">
+        <label class="label">Código de Barras:</label>
+        <div class="control">
+          <input class="input" type="text"  formControlName="cod_barras" placeholder="Insira o código de barras" mask="0000000000000">
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Produto: </label>
+        <div class="control">
+          <input class="input" type="text" formControlName="nome" placeholder="Nome do Produto">
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Quantidade:</label>
+        <div class="control">
+          <input class="input" type="number" formControlName="quantidade" placeholder="Quantidade de Itens">
+        </div>
+      </div>
+      
+      <div class="field">
+        <label class="label">Preço</label>
+        <div class="control">
+          <input class="input" type="number" formControlName="valor" placeholder="Preço do Produto" f>
+        </div>
+      </div>
+
+      
+      <div class="field is-grouped">
+        <div class="control">
+          <button class="button is-link">Salvar</button>
         </div>
       
-        <div>
-          <label for="email">Nome do Produto: </label>
-          <input type="text" formControlName="nome">
-        </div>
-      
-        <div>
-          <label for="cpf">Quantidade: </label>
-          <input type="number" formControlName="quantidade">
-        </div>
-      
-        <div>
-          <label for="nascimento">Preço: </label>
-          <input type="number" formControlName="valor" >
-        </div>
-    
-        <br>
-        <div>
-          <button [disabled]="!form.valid">Enviar dados</button>
-        </div>
-      
-        <br>
-        <br>
-      
-        <div>{{ form.value | json}}</div>
-        <div>{{ form.valid | json }}</div>
-      </form>
+      </div>
+    </form>
 </div>

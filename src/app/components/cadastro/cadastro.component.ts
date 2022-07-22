@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ProdutoModel } from 'src/app/model/produto-model';
 
 @Component({
   selector: 'app-cadastro',
@@ -10,25 +11,35 @@ export class CadastroComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  produto: ProdutoModel = {};
 
-
-  criarFormularioDeUsuario() {
+  constructor(private fb: FormBuilder) { 
     this.form = this.fb.group({
-      nome: [''],
-      email: [''],
-      cpf: [''],
-      nascimento: [''],
-      senha: [''],
-      confirmarSenha: ['']
+      nome: ['', [Validators.required]],
+      quantidade: ['', [Validators.required]],
+      cod_barras: ['', [Validators.required]],
+      valor: ['', [Validators.required]],
     });
   }
+
+
 
   ngOnInit(): void {
   }
 
+
+  
+  novoProduto(){
+    this.produto = this.form.value;
+    console.log("Produto aqui");
+    
+    console.log(this.produto);
+  }
+
   enviarDados() {
-    console.log(this.form.value);
+    this.novoProduto();
+    console.log("Tá aqui");
+   
   }
 
 
