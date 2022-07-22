@@ -4,7 +4,13 @@
     align-items: center;
 }
 
+.scanner{
+    margin: 20px;
+    padding: auto;
+}
+
 .formulario {
+    padding-top: 10px;
     margin: 20px;
 
 }

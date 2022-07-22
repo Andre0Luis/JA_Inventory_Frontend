@@ -1,40 +1,60 @@
-<div class="formulario">
-    <form [formGroup]="form" (ngSubmit)="enviarDados()">
+<div class="cadastro">
+  <div class="scanner">
 
-      <div class="field">
-        <label class="label">Código de Barras:</label>
-        <div class="control">
-          <input class="input" type="text"  formControlName="cod_barras" placeholder="Insira o código de barras" mask="0000000000000">
-        </div>
-      </div>
-
-      <div class="field">
-        <label class="label">Produto: </label>
-        <div class="control">
-          <input class="input" type="text" formControlName="nome" placeholder="Nome do Produto">
-        </div>
+    <div class="box">
+      <barcode-scanner-livestream type="code_128" (valueChanges)="onValueChanges($event)" (started)="(onStarted)">
+      </barcode-scanner-livestream>
+      <div [hidden]="!barcodeValue">
+        {{ barcodeValue }}
       </div>
 
-      <div class="field">
-        <label class="label">Quantidade:</label>
-        <div class="control">
-          <input class="input" type="number" formControlName="quantidade" placeholder="Quantidade de Itens">
-        </div>
-      </div>
-      
-      <div class="field">
-        <label class="label">Preço</label>
-        <div class="control">
-          <input class="input" type="number" formControlName="valor" placeholder="Preço do Produto" f>
-        </div>
-      </div>
+    </div>
 
-      
-      <div class="field is-grouped">
-        <div class="control">
-          <button class="button is-link">Salvar</button>
-        </div>
-      
+    <div class="field is-grouped">
+      <div class="control">
+        <button class="button is-link" (click)="iniciarLeitura()">Ler</button>
       </div>
-    </form>
-</div>
+    </div>
+
+    <div class="formulario">
+      <form [formGroup]="form" (ngSubmit)="enviarDados()">
+
+        <div class="field">
+          <label class="label">Código de Barras:</label>
+          <div class="control">
+            <input class="input" type="text" formControlName="cod_barras" placeholder="Insira o código de barras"
+              mask="0000000000000">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Produto: </label>
+          <div class="control">
+            <input class="input" type="text" formControlName="nome" placeholder="Nome do Produto">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Quantidade:</label>
+          <div class="control">
+            <input class="input" type="number" formControlName="quantidade" placeholder="Quantidade de Itens">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Preço</label>
+          <div class="control">
+            <input class="input" type="number" formControlName="valor" placeholder="Preço do Produto" f>
+          </div>
+        </div>
+
+
+        <div class="field is-grouped">
+          <div class="control">
+            <button class="button is-link">Salvar</button>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>

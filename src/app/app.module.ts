@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CadastroComponent } from './components/cadastro/cadastro.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxMaskModule } from 'ngx-mask';
-
+import { BarcodeScannerLivestreamModule } from 'ngx-barcode-scanner';
 
 
 @NgModule({
@@ -22,6 +22,7 @@ import { NgxMaskModule } from 'ngx-mask';
     ReactiveFormsModule,
     FormsModule,
     NgxMaskModule.forRoot(),
+    BarcodeScannerLivestreamModule
   ],
   providers: [],
   bootstrap: [AppComponent]
