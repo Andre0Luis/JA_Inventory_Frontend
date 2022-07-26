@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
@@ -23,8 +23,10 @@
     "@eisberg-labs/ngx-barcode-scanner": "^3.0.1",
     "@ericblade/quagga2": "^1.7.0",
     "bulma": "^0.9.4",
+    "express": "^4.18.1",
     "ngx-barcode-scanner": "^0.3.0",
     "ngx-mask": "^14.0.3",
+    "path": "^0.12.7",
     "primeicons": "^5.0.0",
     "quagga": "^0.12.1",
     "rxjs": "~6.6.0",
@@ -44,5 +46,9 @@
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
     "typescript": "~4.6.4"
+  },
+  "engines": {
+    "node": "16.15.0",
+    "npm": "8.5.5"
   }
 }
