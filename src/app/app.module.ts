@@ -8,6 +8,7 @@ import { CadastroComponent } from './components/cadastro/cadastro.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxMaskModule } from 'ngx-mask';
 import { BarcodeScannerLivestreamModule } from 'ngx-barcode-scanner';
+import { NgxBarcodeScannerModule } from '@eisberg-labs/ngx-barcode-scanner';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { BarcodeScannerLivestreamModule } from 'ngx-barcode-scanner';
     ReactiveFormsModule,
     FormsModule,
     NgxMaskModule.forRoot(),
-    BarcodeScannerLivestreamModule
+    BarcodeScannerLivestreamModule,
+    NgxBarcodeScannerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

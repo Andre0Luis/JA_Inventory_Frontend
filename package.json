@@ -20,11 +20,13 @@
     "@angular/platform-browser": "^14.1.0",
     "@angular/platform-browser-dynamic": "^14.1.0",
     "@angular/router": "^14.1.0",
+    "@eisberg-labs/ngx-barcode-scanner": "^3.0.1",
     "@ericblade/quagga2": "^1.7.0",
     "bulma": "^0.9.4",
     "ngx-barcode-scanner": "^0.3.0",
     "ngx-mask": "^14.0.3",
     "primeicons": "^5.0.0",
+    "quagga": "^0.12.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
