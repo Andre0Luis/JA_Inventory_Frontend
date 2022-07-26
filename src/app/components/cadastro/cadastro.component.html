@@ -2,7 +2,7 @@
   <div class="scanner">
 
     <div class="box">
-      <barcode-scanner--overlay [type]="['code_128', 'code_39', 'ean_8']"
+      <barcode-scanner-livestream-overlay [type]="['code_128', 'code_39', 'ean_8']"
       (valueChanges)="onValueChanges($event)"
       (started)="onStarted($event)" capture="camera">
       </barcode-scanner-livestream-overlay>
