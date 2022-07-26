@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { QuaggaJSResultObject } from '@ericblade/quagga2';
 import { BarcodeScannerLivestreamComponent } from 'ngx-barcode-scanner';
 import { ProdutoModel } from 'src/app/model/produto-model';
 
@@ -43,17 +44,17 @@ export class CadastroComponent implements OnInit {
   }
 
 
-  onValueChanges(result) {
+  onValueChanges(result: QuaggaJSResultObject):void {
     console.log("Resultados: ");
     this.barcodeValue = result.codeResult.code;
     console.log("Aqui: ", this.barcodeValue);
     
   }
 
-  onStarted(started) {
-    console.log("Iniciou a leitura: ");
+  onStarted(event):void {
+    console.log("On started: ");
     
-    console.log(started);
+    console.log("Started",event);
   }
 
 
