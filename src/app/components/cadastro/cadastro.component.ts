@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { QuaggaJSResultObject } from '@ericblade/quagga2';
-import { BarcodeScannerLivestreamComponent } from 'ngx-barcode-scanner';
+import { BarcodeScannerLivestreamComponent, BarcodeScannerLivestreamOverlayComponent } from 'ngx-barcode-scanner';
 import { ProdutoModel } from 'src/app/model/produto-model';
 
 @Component({
@@ -11,8 +11,10 @@ import { ProdutoModel } from 'src/app/model/produto-model';
 })
 export class CadastroComponent implements OnInit {
 
-  @ViewChild(BarcodeScannerLivestreamComponent)
-  barcodeScanner: BarcodeScannerLivestreamComponent;
+  @ViewChild(BarcodeScannerLivestreamOverlayComponent)
+    barcodeScanner: BarcodeScannerLivestreamOverlayComponent;
+  // @ViewChild(BarcodeScannerLivestreamComponent)
+  // barcodeScanner: BarcodeScannerLivestreamComponent;
 
   form: FormGroup;
   produto: ProdutoModel = {};
@@ -32,17 +34,27 @@ export class CadastroComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // iniciarLeitura(){
+  //   if(!this.barcodeAtivo){
+  //     this.barcodeScanner.start();
+  //     this.barcodeAtivo = true;
+  //   } else{
+  //     this.barcodeScanner.stop();
+  //     this.barcodeAtivo = false;
+  //   }
+    
+  // }
+
   iniciarLeitura(){
     if(!this.barcodeAtivo){
-      this.barcodeScanner.start();
+      this.barcodeScanner.show();
       this.barcodeAtivo = true;
     } else{
-      this.barcodeScanner.stop();
+     
       this.barcodeAtivo = false;
     }
     
   }
-
 
   onValueChanges(result: QuaggaJSResultObject):void {
     console.log("Resultados: ");
