@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgxBarcodeScannerService } from '@eisberg-labs/ngx-barcode-scanner';
 import { QuaggaJSResultObject } from '@ericblade/quagga2';
 import { BarcodeScannerLivestreamComponent, BarcodeScannerLivestreamOverlayComponent } from 'ngx-barcode-scanner';
 import { ProdutoModel } from 'src/app/model/produto-model';
@@ -11,8 +12,8 @@ import { ProdutoModel } from 'src/app/model/produto-model';
 })
 export class CadastroComponent implements OnInit {
 
-  @ViewChild(BarcodeScannerLivestreamOverlayComponent)
-    barcodeScanner: BarcodeScannerLivestreamOverlayComponent;
+  // @ViewChild(BarcodeScannerLivestreamOverlayComponent)
+  //   barcodeScanner: BarcodeScannerLivestreamOverlayComponent;
   // @ViewChild(BarcodeScannerLivestreamComponent)
   // barcodeScanner: BarcodeScannerLivestreamComponent;
 
@@ -22,7 +23,12 @@ export class CadastroComponent implements OnInit {
   barcodeValue: string;
   barcodeAtivo: boolean;
 
-  constructor(private fb: FormBuilder) { 
+
+  value: string;
+  isError = false;
+
+  constructor(private fb: FormBuilder,
+  private service: NgxBarcodeScannerService){ 
     this.form = this.fb.group({
       nome: ['', [Validators.required]],
       quantidade: ['', [Validators.required]],
@@ -47,28 +53,41 @@ export class CadastroComponent implements OnInit {
 
   iniciarLeitura(){
     if(!this.barcodeAtivo){
-      this.barcodeScanner.show();
       this.barcodeAtivo = true;
+      this.loopVerificador();
     } else{
-     
       this.barcodeAtivo = false;
+      this.service.stop();
     }
     
   }
 
-  onValueChanges(result: QuaggaJSResultObject):void {
+  loopVerificador(){
+    while(!this.value){
+      setTimeout(()=> {
+        console.log("No loop");
+      }, 100)
+      
+      
+    } 
+   console.log("Saiu do loop");
+   
+    this.onValueChanges(this.value);
+    this.value = null;
+
+  }
+
+  onValueChanges(result: string):void {
     console.log("Resultados: ");
-    this.barcodeValue = result.codeResult.code;
-    console.log("Aqui: ", this.barcodeValue);
+    this.form.controls['cod_barras'].setValue(result)
+    console.log("Aqui: ", result);
     
   }
 
-  onStarted(event):void {
-    console.log("On started: ");
-    
-    console.log("Started",event);
+  onError(error: any) {
+    console.error(error);
+    this.isError = true;
   }
-
 
   novoProduto(){
     this.produto = this.form.value;
