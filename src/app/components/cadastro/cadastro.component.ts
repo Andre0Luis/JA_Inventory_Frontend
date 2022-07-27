@@ -66,7 +66,7 @@ export class CadastroComponent implements OnInit {
     while(!this.value){
       setTimeout(()=> {
         console.log("No loop");
-      }, 100)
+      }, 1000)
       
       
     } 
