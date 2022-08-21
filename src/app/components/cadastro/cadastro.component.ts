@@ -17,6 +17,7 @@ export class CadastroComponent implements OnInit {
  
   barcodeValue: string;
   barcodeAtivo: boolean;
+  stopRead: boolean;
 
   value: string;
   isError = false;
@@ -38,9 +39,11 @@ export class CadastroComponent implements OnInit {
   leitura(){
     if(!this.barcodeAtivo){
       this.barcodeAtivo = true;
+      this.stopRead = false;
       this.loopVerificador();
     } else{
       this.barcodeAtivo = false;
+      this.stopRead = true;
       this.service.stop();
     }
     
@@ -61,8 +64,10 @@ export class CadastroComponent implements OnInit {
         this.leitura();
     
         } else {
-          console.log("Não achou");
+          if(!this.stopRead){
+            console.log("Não achou");
           this.loopVerificador();
+          }
           
         }
      }, 1000);   
