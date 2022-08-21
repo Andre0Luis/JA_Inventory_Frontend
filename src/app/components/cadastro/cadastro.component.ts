@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgxBarcodeScannerService } from '@eisberg-labs/ngx-barcode-scanner';
-import { QuaggaJSResultObject } from '@ericblade/quagga2';
-import { BarcodeScannerLivestreamComponent, BarcodeScannerLivestreamOverlayComponent } from 'ngx-barcode-scanner';
 import { ProdutoModel } from 'src/app/model/produto-model';
+import { getMainBarcodeScanningCamera } from '../acesso-camera/acesso-camera';
+import Quagga from '@ericblade/quagga2';
 
 @Component({
   selector: 'app-cadastro',
@@ -14,7 +14,7 @@ export class CadastroComponent implements OnInit {
 
   form: FormGroup;
   produto: ProdutoModel = {};
- 
+
   barcodeValue: string;
   barcodeAtivo: boolean;
   stopRead: boolean;
@@ -23,7 +23,7 @@ export class CadastroComponent implements OnInit {
   isError = false;
 
   constructor(private fb: FormBuilder,
-  private service: NgxBarcodeScannerService){ 
+    private service: NgxBarcodeScannerService) {
     this.form = this.fb.group({
       nome: ['', [Validators.required]],
       quantidade: ['', [Validators.required]],
@@ -36,49 +36,54 @@ export class CadastroComponent implements OnInit {
   }
 
 
-  leitura(){
-    if(!this.barcodeAtivo){
+  async leitura() {
+    if (!this.barcodeAtivo) {
+      const videoStream = await navigator.mediaDevices.getUserMedia({ video: true });
       this.barcodeAtivo = true;
       this.stopRead = false;
       this.loopVerificador();
-    } else{
+    } else {
       this.barcodeAtivo = false;
       this.stopRead = true;
       this.service.stop();
     }
-    
+
   }
 
-  loopVerificador(){
+  loopVerificador() {
     console.log("Entrou No metotodo do loop");
-    
+
     console.log("VALUE: ", this.value);
-  
-     setTimeout(()=> {
+
+    setTimeout(() => {
       console.log("Está procurando value ", this.value);
-        if(this.value){
-          console.log("VALUE NAO NULL: ", this.value);
-        
+      if (this.value) {
+        console.log("VALUE NAO NULL: ", this.value);
+
+
+
         this.onValueChanges(this.value);
         this.value = null;
         this.leitura();
-    
-        } else {
-          if(!this.stopRead){
-            console.log("Não achou");
+
+
+
+      } else {
+        if (!this.stopRead) {
+          console.log("Não achou");
           this.loopVerificador();
-          }
-          
         }
-     }, 1000);   
+
+      }
+    }, 1000);
 
   }
 
-  onValueChanges(result: string):void {
+  onValueChanges(result: string): void {
     console.log("Resultados: ");
     this.form.controls['cod_barras'].setValue(result)
     console.log("Resultado Aqui: ", result);
-    
+
   }
 
   onError(error: any) {
@@ -86,17 +91,17 @@ export class CadastroComponent implements OnInit {
     this.isError = true;
   }
 
-  novoProduto(){
+  novoProduto() {
     this.produto = this.form.value;
     console.log("Produto aqui");
-    
+
     console.log(this.produto);
   }
 
   enviarDados() {
     this.novoProduto();
     console.log("Tá aqui");
-   
+
   }
 
 
