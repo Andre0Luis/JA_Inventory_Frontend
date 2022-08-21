@@ -12,17 +12,11 @@ import { ProdutoModel } from 'src/app/model/produto-model';
 })
 export class CadastroComponent implements OnInit {
 
-  // @ViewChild(BarcodeScannerLivestreamOverlayComponent)
-  //   barcodeScanner: BarcodeScannerLivestreamOverlayComponent;
-  // @ViewChild(BarcodeScannerLivestreamComponent)
-  // barcodeScanner: BarcodeScannerLivestreamComponent;
-
   form: FormGroup;
   produto: ProdutoModel = {};
  
   barcodeValue: string;
   barcodeAtivo: boolean;
-
 
   value: string;
   isError = false;
@@ -40,18 +34,8 @@ export class CadastroComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  // iniciarLeitura(){
-  //   if(!this.barcodeAtivo){
-  //     this.barcodeScanner.start();
-  //     this.barcodeAtivo = true;
-  //   } else{
-  //     this.barcodeScanner.stop();
-  //     this.barcodeAtivo = false;
-  //   }
-    
-  // }
 
-  iniciarLeitura(){
+  leitura(){
     if(!this.barcodeAtivo){
       this.barcodeAtivo = true;
       this.loopVerificador();
@@ -63,24 +47,32 @@ export class CadastroComponent implements OnInit {
   }
 
   loopVerificador(){
-    while(!this.value){
-      setTimeout(()=> {
-        console.log("No loop");
-      }, 1000)
-      
-      
-    } 
-   console.log("Saiu do loop");
-   
-    this.onValueChanges(this.value);
-    this.value = null;
+    console.log("Entrou No metotodo do loop");
+    
+    console.log("VALUE: ", this.value);
+  
+     setTimeout(()=> {
+      console.log("Está procurando value ", this.value);
+        if(this.value){
+          console.log("VALUE NAO NULL: ", this.value);
+        
+        this.onValueChanges(this.value);
+        this.value = null;
+        this.leitura();
+    
+        } else {
+          console.log("Não achou");
+          this.loopVerificador();
+          
+        }
+     }, 1000);   
 
   }
 
   onValueChanges(result: string):void {
     console.log("Resultados: ");
     this.form.controls['cod_barras'].setValue(result)
-    console.log("Aqui: ", result);
+    console.log("Resultado Aqui: ", result);
     
   }
 
