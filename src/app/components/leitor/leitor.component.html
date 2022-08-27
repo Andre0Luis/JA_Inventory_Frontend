@@ -1,0 +1,12 @@
+<div class="leitor">
+  <div class="box" *ngIf="barcodeAtivo">
+    <ngx-barcode-scanner [(value)]="value" [codes]="['code_128', 'ean', 'upc', 'upc_e', 'ean_8']" [errorThreshold]="0.1"
+      (exception)="onError($event)" capture="camera"></ngx-barcode-scanner>
+  </div>
+
+  <div class="field is-grouped">
+    <div class="control">
+      <button class="button is-link" (click)="leitura()">Ler</button>
+    </div>
+  </div>
+</div>

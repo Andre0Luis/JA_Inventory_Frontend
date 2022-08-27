@@ -9,12 +9,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxMaskModule } from 'ngx-mask';
 import { BarcodeScannerLivestreamModule } from 'ngx-barcode-scanner';
 import { NgxBarcodeScannerModule } from '@eisberg-labs/ngx-barcode-scanner';
+import { LeitorComponent } from './components/leitor/leitor.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    CadastroComponent
+    CadastroComponent,
+    LeitorComponent
   ],
   imports: [
     BrowserModule,

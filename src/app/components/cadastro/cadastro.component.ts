@@ -14,13 +14,7 @@ export class CadastroComponent implements OnInit {
 
   form: FormGroup;
   produto: ProdutoModel = {};
-
   barcodeValue: string;
-  barcodeAtivo: boolean;
-  stopRead: boolean;
-
-  value: string;
-  isError = false;
 
   constructor(private fb: FormBuilder,
     private service: NgxBarcodeScannerService) {
@@ -35,73 +29,16 @@ export class CadastroComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
-  async leitura() {
-    if (!this.barcodeAtivo) {
-      const videoStream = await navigator.mediaDevices.getUserMedia({ video: true });
-      this.barcodeAtivo = true;
-      this.stopRead = false;
-      this.loopVerificador();
-    } else {
-      this.barcodeAtivo = false;
-      this.stopRead = true;
-      this.service.stop();
-    }
-
-  }
-
-  loopVerificador() {
-    console.log("Entrou No metotodo do loop");
-
-    console.log("VALUE: ", this.value);
-
-    setTimeout(() => {
-      console.log("Está procurando value ", this.value);
-      if (this.value) {
-        console.log("VALUE NAO NULL: ", this.value);
-
-
-
-        this.onValueChanges(this.value);
-        this.value = null;
-        this.leitura();
-
-
-
-      } else {
-        if (!this.stopRead) {
-          console.log("Não achou");
-          this.loopVerificador();
-        }
-
-      }
-    }, 1000);
-
-  }
-
   onValueChanges(result: string): void {
-    console.log("Resultados: ");
     this.form.controls['cod_barras'].setValue(result)
-    console.log("Resultado Aqui: ", result);
-
-  }
-
-  onError(error: any) {
-    console.error(error);
-    this.isError = true;
   }
 
   novoProduto() {
     this.produto = this.form.value;
-    console.log("Produto aqui");
-
-    console.log(this.produto);
   }
 
   enviarDados() {
     this.novoProduto();
-    console.log("Tá aqui");
-
   }
 
 
